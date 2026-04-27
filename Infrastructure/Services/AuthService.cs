@@ -15,9 +15,9 @@ namespace MultitenancyDemo.Infrastructure.Services
 
     public class AuthService : IAuthService
     {
-        private readonly ApplicationDbContext _context;
+        private readonly UserDbContext _context;
         private readonly IConfiguration _config;
-        public AuthService(ApplicationDbContext context, IConfiguration config)
+        public AuthService(UserDbContext context, IConfiguration config)
         {
             _context = context;
             _config = config;
