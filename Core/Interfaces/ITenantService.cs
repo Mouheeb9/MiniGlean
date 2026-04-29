@@ -1,10 +1,9 @@
-﻿using MultitenancyDemo.Core.Settings;
+﻿using MultitenancyDemo.Core.Entities;
 
 namespace MultitenancyDemo.Core.Interfaces;
 
 public interface ITenantService
 {
-    string GetDatabaseProvider();
     string GetConnectionString();
     Tenant GetTenant();
 }

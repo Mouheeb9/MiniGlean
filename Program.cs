@@ -1,5 +1,4 @@
 using MultitenancyDemo.Core.Interfaces;
-using MultitenancyDemo.Core.Settings;
 using Microsoft.EntityFrameworkCore;
 using MultitenancyDemo.Infrastructure.Extensions;
 using MultitenancyDemo.Infrastructure.Services;
@@ -34,11 +33,8 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     });
 
 // Tenant
-builder.Services.Configure<TenantSettings>(
-    builder.Configuration.GetSection(nameof(TenantSettings)));
-
 builder.Services.AddScoped<ITenantService, TenantService>();
-builder.Services.AddTransient<IProductService, ProductService>();
+builder.Services.AddTransient<IDocumentService, DocumentService>();
 builder.Services.AddScoped<IAuthService, AuthService>();
 
 builder.Services.AddDbContext<UserDbContext>(options =>

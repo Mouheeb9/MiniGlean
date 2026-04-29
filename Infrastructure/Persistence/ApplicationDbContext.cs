@@ -25,13 +25,22 @@ public class ApplicationDbContext : DbContext
         _tenantService = null;
     }
 
-    public DbSet<Product> Products => Set<Product>();
+    public DbSet<Document> Documents => Set<Document>();
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         base.OnModelCreating(modelBuilder);
-        modelBuilder.Entity<Product>()
-            .HasQueryFilter(p => p.TenantId == TenantId);
+
+        // Query filter for multi-tenancy
+        modelBuilder.Entity<Document>()
+            .HasQueryFilter(d => d.TenantId == TenantId);
+
+        // Note: No foreign key constraint because Users are in a different database (OurUsers)
+        // The UserId is maintained as a data-only reference (GUID)
+        // If a user is deleted, documents will orphan (which is acceptable for audit trail)
+        modelBuilder.Entity<Document>()
+            .Property(d => d.UserId)
+            .IsRequired();
     }
 
     
