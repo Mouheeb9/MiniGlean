@@ -15,6 +15,11 @@ public class Document : BaseEntity, IMustHaveTenant
         UploadedAt = DateTime.UtcNow;
     }
 
+    public Document(string name, string description, string type, string filePath, long fileSize)
+        : this(name, description, Guid.Empty, type, filePath, fileSize)
+    {
+    }
+
     protected Document() { }
 
     public string Name { get; private set; } = default!;

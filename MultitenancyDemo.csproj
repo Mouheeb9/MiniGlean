@@ -27,4 +27,13 @@
 	  <Folder Include="Core\Settings\" />
 	</ItemGroup>
 
+	<ItemGroup>
+	  <None Include="frontend\**\*" Exclude="frontend\node_modules\**;frontend\dist\**" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Content Remove="frontend\package.json" />
+	  <Content Remove="frontend\tsconfig.json" />
+	</ItemGroup>
+
 </Project>

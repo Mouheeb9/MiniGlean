@@ -21,13 +21,15 @@ public class DocumentService : IDocumentService
             Directory.CreateDirectory(_uploadPath);
     }
 
-    public async Task<Document> UploadAsync(string name, string description, Guid userId, IFormFile file)
+    public async Task<Document> UploadAsync(string name, string description, IFormFile file)
     {
         if (file == null || file.Length == 0)
             throw new ArgumentException("File is required");
 
-        if (!file.ContentType.Equals("application/pdf", StringComparison.OrdinalIgnoreCase))
-            throw new ArgumentException("Only PDF files are allowed");
+        var extension = Path.GetExtension(file.FileName).ToLowerInvariant();
+        var allowedExtensions = new[] { ".pdf", ".txt", ".docx" };
+        if (!allowedExtensions.Contains(extension))
+            throw new ArgumentException("Only PDF, TXT, or DOCX files are allowed");
 
         var fileName = $"{Guid.NewGuid()}_{file.FileName}";
         var filePath = Path.Combine(_uploadPath, fileName);
@@ -40,8 +42,7 @@ public class DocumentService : IDocumentService
         var document = new Document(
             name,
             description,
-            userId,
-            "pdf",
+            extension.TrimStart('.'),
             filePath,
             file.Length
         );
