@@ -1,0 +1,24 @@
+# --- API & Serveur ---
+fastapi
+uvicorn
+pydantic
+
+# --- RAG & LangChain ---
+langchain
+langchain-community
+langchain-huggingface
+langchain-openai
+langchain-text-splitters
+langchain-core
+
+# --- Vector Database ---
+qdrant-client
+
+# --- Traitement de documents & Embeddings ---
+pdfplumber
+sentence-transformers
+
+# --- Utilitaires ---
+python-dotenv
+rich
+openai

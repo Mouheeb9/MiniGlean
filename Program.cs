@@ -51,15 +51,21 @@ builder.Services.AddDbContext<UserDbContext>(options =>
 // Registers DbContext + runs migrations per tenant on startup
 builder.Services.AddAndMigrateTenantDatabases(builder.Configuration);
 
+builder.Services.AddHttpClient<IRagService, RagService>(client =>
+{
+    client.BaseAddress = new Uri("http://localhost:8000");
+});
+
 var app = builder.Build();
 
 if (app.Environment.IsDevelopment())
-{
+{   
     app.MapOpenApi();
     app.MapScalarApiReference(); // → accessible sur /scalar/v1
 }
 app.UseHttpsRedirection();
 app.UseCors("Frontend");
+app.UseAuthentication();
 app.UseAuthorization();
 app.MapControllers();
 app.Run();

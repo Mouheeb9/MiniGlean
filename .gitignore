@@ -9,3 +9,10 @@ obj/
 appsettings.Development.json
 appsettings.*.Development.json
 **/node_modules/
+Uploads/
+
+# Python
+**/venv/
+**/__pycache__/
+**/*.pyc
+**/AgenticRag/docs/
