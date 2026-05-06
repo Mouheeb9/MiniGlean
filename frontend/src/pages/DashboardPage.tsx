@@ -13,13 +13,14 @@ const DashboardPage: React.FC = () => {
   }, [fetchDocuments]);
 
   return (
-    <div className="flex h-screen bg-base">
+    <div className="flex h-screen overflow-hidden bg-base">
       <Sidebar />
-      <div className="flex flex-1 flex-col">
+      <div className="flex flex-1 flex-col min-h-0">
         <TopBar />
-        <div className="grid flex-1 grid-cols-1 gap-6 overflow-hidden p-6 lg:grid-cols-[1.4fr_1fr]">
-          <div className="flex h-full flex-col gap-6 overflow-hidden">
-            <div className="flex-1 overflow-hidden">
+        <div className="grid flex-1 grid-cols-1 gap-6 min-h-0 p-6 lg:grid-cols-[1.4fr_1fr]">
+          {/* Left column — documents with scroll */}
+          <div className="flex flex-col min-h-0 overflow-hidden">
+            <div className="flex-1 overflow-y-auto rounded-2xl">
               <DocumentList
                 documents={documents}
                 loading={listLoading}
@@ -29,7 +30,10 @@ const DashboardPage: React.FC = () => {
               />
             </div>
           </div>
-          <ChatPanel />
+          {/* Right column — chat with scroll */}
+          <div className="flex flex-col min-h-0 overflow-hidden">
+            <ChatPanel />
+          </div>
         </div>
       </div>
     </div>

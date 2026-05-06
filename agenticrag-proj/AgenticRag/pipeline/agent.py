@@ -70,6 +70,6 @@ def agentic_rag(question: str, tenant_id: str) -> str:
         console.print("[green]   → Aucune contradiction détectée[/green]")
 
     # ÉTAPE 5 — Génération
-    answer = step_generate(question, all_chunks[:8], contradictions)
+    answer = step_generate(question, all_chunks[:4], contradictions)
 
     return answer

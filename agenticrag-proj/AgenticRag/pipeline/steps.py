@@ -121,20 +121,21 @@ def step_generate(question: str, chunks: list[dict], contradictions: list[str]) 
 
     system = """Tu es un assistant expert en analyse documentaire.
 
-RÈGLES :
+RÈGLES STRICTES :
 1. Réponds UNIQUEMENT en te basant sur les sources fournies
-2. Si l'information est absente → dis-le clairement
-3. Cite toujours tes sources [Source X, Page Y]
-4. Si des contradictions existent → signale-les dans ta réponse
-5. Réponds en français si la question est en français
-6. Sois précis, structuré et professionnel"""
+2. Réponse courte et directe — 3 à 5 phrases maximum
+3. PAS de tableau, PAS de liste à puces excessive
+4. Une seule citation de source est suffisante [Source X, Page Y]
+5. NE RÉPÈTE JAMAIS la même information
+6. Si l'information est absente → dis-le en une phrase
+7. Réponds en français si la question est en français"""
 
     user = f"""DOCUMENTS :
 {context}
 {contradiction_warning}
 QUESTION : {question}
 
-Réponds de façon structurée en citant les sources [Source X, Page Y]."""
+Réponds de façon concise et directe en 3-5 phrases. Une seule citation suffit."""
 
     llm      = get_llm()
     response = llm.invoke([
@@ -142,3 +143,32 @@ Réponds de façon structurée en citant les sources [Source X, Page Y]."""
         HumanMessage(content=user)
     ])
     return response.content
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

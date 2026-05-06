@@ -54,6 +54,7 @@ builder.Services.AddAndMigrateTenantDatabases(builder.Configuration);
 builder.Services.AddHttpClient<IRagService, RagService>(client =>
 {
     client.BaseAddress = new Uri("http://localhost:8000");
+    client.Timeout = TimeSpan.FromMinutes(3);
 });
 
 var app = builder.Build();
